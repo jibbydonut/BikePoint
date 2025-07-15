@@ -10,15 +10,15 @@ load_dotenv()
 
 def main():
     try:
-        # 🟢 Stage 1: Extract data from API
+        # Extract data from API
         bikepoint_extract()
         logging.info("Stage 1: Extraction successful")
 
-        # 🟢 Stage 2: Validate and locate JSON
+        # Validate and locate JSON
         local_path, name_for_s3 = get_single_json_from_temp()
         logging.info("Stage 2: JSON validation successful")
 
-        # 🟢 Stage 3: Upload to S3
+        # Upload to S3
         aws_access = os.getenv('ACCESS_KEY')
         aws_secret = os.getenv('SECRET_ACCESS_KEY')
         bucket = os.getenv("AWS_BUCKET_NAME")
