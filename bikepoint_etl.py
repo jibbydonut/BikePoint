@@ -118,8 +118,8 @@ def upload_json_to_s3(file_path, bucket, object_name, aws_access, aws_secret_acc
     )
     try:
         s3_client.upload_file(file_path, bucket, object_name)
-        logging.info(f"File uploaded to S3: s3://{bucket}/{name_for_s3}")
-        os.remove(local_path)
+        logging.info(f"File uploaded to S3: s3://{bucket}/{object_name}")
+        os.remove(file_path)
         logging.info(f"Deleted file from temp folder")
     except boto3.exceptions.S3UploadFailedError as e:
         logging.error(f"S3 upload failed: {e}")
@@ -132,5 +132,7 @@ def upload_json_to_s3(file_path, bucket, object_name, aws_access, aws_secret_acc
 # bucket = os.getenv("AWS_BUCKET_NAME")
 
 
-
+if __name__ == '__main__':
+    print('this is in main! can put all testing code in here which will not run in the main main file')
+print('this is not in main! this will always run!')
 
