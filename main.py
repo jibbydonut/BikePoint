@@ -7,6 +7,9 @@ from helper import setup_logger
 
 setup_logger()
 load_dotenv()
+import os
+os.makedirs('temp', exist_ok=True)
+
 
 def main():
     try:
