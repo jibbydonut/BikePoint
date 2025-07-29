@@ -1,0 +1,33 @@
+# Schedules to run every hour or manually
+
+name: Bikepoint Schedule
+
+# Script the runs bikepoint extract and load main.py script
+on:
+  schedule:
+      - cron: '0 * * * *'
+  workflow_dispatch: 
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: bikepoint_schedule_env
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install packages
+        run: pip install -r requirements.txt
+
+      - name: run python script
+        env:
+          aws_access: ${{secrets.ACCESS_KEY}}
+          aws_secret: ${{secrets.SECRET_ACCESS_KEY}}
+          bucket: ${{secrets.AWS_BUCKET_NAME}}
+        run: python main.py
