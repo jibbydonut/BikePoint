@@ -12,3 +12,4 @@ def setup_logger(log_file='export_api.log'):
     console_handler.setFormatter(formatter)
 
     logging.basicConfig(level=logging.INFO, handlers=[file_handler, console_handler])
+    # test comment
